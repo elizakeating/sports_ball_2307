@@ -37,33 +37,48 @@ class Team
   end
 
   def total_value
-    tot_value = 0
-    @roster.each do |player|
-      tot_value += player.total_cost
+    # tot_value = 0
+    # @roster.each do |player|
+    #   tot_value += player.total_cost
+    # end
+    # tot_value
+
+    @roster.sum do |player|
+      player.total_cost
     end
-    tot_value
   end
 
   def details
-    {"total_value" => self.total_value, "player_count" => @roster.size}
+    {"total_value" => total_value, "player_count" => player_count}
   end
 
   def players_by_last_name
     last_names = @roster.map do |player|
       player.last_name
     end
-    last_names_sorted = last_names.sort
+    last_names.sort.join(", ")
     
-    last_names_sorted.join(", ")
+    # last_names_sorted.join(", ")
   end
 
-  def average_cost_of_player
-    tot_value = 0
-    @roster.each do |player|
-      tot_value += player.total_cost
-    end
-    tot_value
+  # def average_cost_of_player
+  #   # tot_value = 0
+  #   # @roster.each do |player|
+  #   #   tot_value += player.total_cost
+  #   # end
+  #   # tot_value
 
-    average = tot_value/@roster.count.to_s
+  #   # average = tot_value/@roster.count.to_s
+
+  #   average = (total_value/player_count).to_s
+  # end
+
+  def average_cost_of_player
+    raw_num = (total_value / player_count).to_s
+    reversed_array = raw_num.reverse.split("").each_slice(3).to_a 
+    formatted = reversed_array.map do |num|
+     num.reverse.join("")
+    end
+    formatted.reverse.join(",").insert(0, "$")
   end
 end

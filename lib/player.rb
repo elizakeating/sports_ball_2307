@@ -7,8 +7,8 @@ class Player
               :nickname
 
   def initialize(name, monthly_cost, contract_length)
-    @first_name = name.split[0]
-    @last_name = name.split[1]
+    @first_name = name.split[0] # could also do .first
+    @last_name = name.split[1] # could also do .last [-1] always hits last element of array
     @monthly_cost = monthly_cost
     @contract_length = contract_length
     @total_cost = monthly_cost * contract_length
