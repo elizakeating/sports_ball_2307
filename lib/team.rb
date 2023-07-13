@@ -47,4 +47,23 @@ class Team
   def details
     {"total_value" => self.total_value, "player_count" => @roster.size}
   end
+
+  def players_by_last_name
+    last_names = @roster.map do |player|
+      player.last_name
+    end
+    last_names_sorted = last_names.sort
+    
+    last_names_sorted.join(", ")
+  end
+
+  def average_cost_of_player
+    tot_value = 0
+    @roster.each do |player|
+      tot_value += player.total_cost
+    end
+    tot_value
+
+    average = tot_value/@roster.count.to_s
+  end
 end
